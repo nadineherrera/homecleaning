@@ -17,15 +17,11 @@
       --radius: 20px;
       --radius-sm: 12px;
       --max: 1180px;
+      --success: #2f6b4f;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -80,9 +76,7 @@
       font-size: 0.92rem;
     }
 
-    .hero {
-      padding: 48px 0 28px;
-    }
+    .hero { padding: 48px 0 28px; }
 
     .hero-grid {
       display: grid;
@@ -101,9 +95,7 @@
       box-shadow: var(--shadow);
     }
 
-    .hero-card {
-      padding: 34px;
-    }
+    .hero-card { padding: 34px; }
 
     .eyebrow {
       color: var(--accent);
@@ -166,7 +158,8 @@
     }
 
     .quick-links a,
-    .button-link {
+    .button-link,
+    .toolbar button {
       text-decoration: none;
       color: var(--text);
       padding: 12px 14px;
@@ -175,20 +168,80 @@
       border-radius: var(--radius-sm);
       font-weight: 600;
       display: inline-block;
+      cursor: pointer;
+      font: inherit;
     }
 
-    main {
-      padding: 8px 0 48px;
+    .button-link:hover,
+    .quick-links a:hover,
+    .toolbar button:hover,
+    nav a:hover {
+      filter: brightness(0.98);
     }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .toolbar .primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .stats {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .stat-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .progress-wrap {
+      margin-top: 14px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #e8e1d6;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    .progress-text {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    main { padding: 8px 0 48px; }
 
     .section {
       margin-top: 24px;
       scroll-margin-top: 88px;
     }
 
-    .section-card {
-      padding: 28px;
-    }
+    .section-card { padding: 28px; }
 
     .section-title {
       display: flex;
@@ -215,46 +268,27 @@
       gap: 16px;
     }
 
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .task-card {
+    .task-card,
+    .timeline-item {
       background: #fff;
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 18px;
     }
 
-    .task-card h3 {
+    .task-card h3,
+    .timeline-item h3 {
       margin-top: 0;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-size: 1.05rem;
-    }
-
-    ul {
-      padding-left: 18px;
-      margin: 0;
-    }
-
-    li + li {
-      margin-top: 6px;
     }
 
     .timeline {
       display: grid;
       gap: 12px;
-    }
-
-    .timeline-item {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 18px;
     }
 
     .timeline-item strong {
@@ -266,6 +300,70 @@
       font-size: 0.78rem;
     }
 
+    .checklist {
+      display: grid;
+      gap: 10px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid #ece5db;
+      border-radius: 12px;
+      background: #fcfbf8;
+      transition: all 0.2s ease;
+    }
+
+    .check-item:hover {
+      background: #faf7f1;
+    }
+
+    .check-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      margin: 1px 0 0;
+      border-radius: 6px;
+      border: 1.5px solid #b9ab95;
+      background: white;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      cursor: pointer;
+    }
+
+    .check-item input[type="checkbox"]::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      transform: scale(0);
+      transition: transform 0.15s ease;
+      border-radius: 3px;
+      background: var(--success);
+    }
+
+    .check-item input[type="checkbox"]:checked::after {
+      transform: scale(1);
+    }
+
+    .check-item label {
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .check-item.completed {
+      background: #f3f7f4;
+      border-color: #cfe0d5;
+    }
+
+    .check-item.completed label {
+      text-decoration: line-through;
+      color: #5b6b61;
+    }
+
     .footer-note {
       margin-top: 28px;
       color: var(--muted);
@@ -273,9 +371,7 @@
       text-align: center;
     }
 
-    footer {
-      padding: 12px 0 40px;
-    }
+    footer { padding: 12px 0 40px; }
 
     @media (max-width: 960px) {
       .hero-grid,
@@ -295,17 +391,11 @@
     @media (max-width: 640px) {
       .hero-card,
       .info-card,
-      .section-card {
-        padding: 20px;
-      }
-
-      nav {
-        gap: 8px;
-      }
-
-      nav a {
-        font-size: 0.85rem;
-      }
+      .section-card { padding: 20px; }
+      nav { gap: 8px; }
+      nav a { font-size: 0.85rem; }
+      .toolbar { flex-direction: column; }
+      .toolbar button, .button-link { width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -330,11 +420,28 @@
         <div class="eyebrow">Family of 3 • 3 Cats • 3 Bedroom • 2 Bath</div>
         <h1>Keep the house maintained without another exhausting reset weekend.</h1>
         <p>
-          This webpage organizes cleaning, homeowner maintenance, pet-related upkeep,
+          This page organizes cleaning, homeowner maintenance, pet-related upkeep,
           yard care, and basement business operations into a simple rhythm: daily,
           weekly, biweekly, monthly, quarterly, twice per year, and annual.
         </p>
-        <a class="button-link" href="#daily">Start with the routine</a>
+        <div class="toolbar">
+          <a class="button-link" href="#daily">Start with the routine</a>
+          <button id="resetAll" class="primary" type="button">Reset all checkboxes</button>
+          <button id="checkAll" type="button">Check all</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat-chip"><span id="completedCount">0</span> completed</div>
+          <div class="stat-chip"><span id="remainingCount">0</span> remaining</div>
+          <div class="stat-chip"><span id="percentComplete">0%</span> done</div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-track">
+            <div id="progressBar" class="progress-bar"></div>
+          </div>
+          <div id="progressText" class="progress-text">0 of 0 tasks completed.</div>
+        </div>
 
         <div class="hero-meta">
           <div class="mini-card">
@@ -382,29 +489,29 @@
         <div class="grid-3">
           <div class="task-card">
             <h3>Kitchen</h3>
-            <ul>
-              <li>Load dishwasher or wash dishes</li>
-              <li>Wipe counters and stovetop</li>
-              <li>Put food away</li>
-              <li>Quick sweep of crumbs</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="n1"><label for="n1">Load dishwasher or wash dishes</label></div>
+              <div class="check-item"><input type="checkbox" id="n2"><label for="n2">Wipe counters and stovetop</label></div>
+              <div class="check-item"><input type="checkbox" id="n3"><label for="n3">Put food away</label></div>
+              <div class="check-item"><input type="checkbox" id="n4"><label for="n4">Quick sweep of crumbs</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>House Reset</h3>
-            <ul>
-              <li>Pick up clutter</li>
-              <li>Fold blankets</li>
-              <li>Straighten pillows</li>
-              <li>Quick bathroom sink wipe</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="n5"><label for="n5">Pick up clutter</label></div>
+              <div class="check-item"><input type="checkbox" id="n6"><label for="n6">Fold blankets</label></div>
+              <div class="check-item"><input type="checkbox" id="n7"><label for="n7">Straighten pillows</label></div>
+              <div class="check-item"><input type="checkbox" id="n8"><label for="n8">Quick bathroom sink wipe</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Pets + Laundry</h3>
-            <ul>
-              <li>Scoop litter boxes</li>
-              <li>Shake litter mats</li>
-              <li>Move or fold one small laundry load</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="n9"><label for="n9">Scoop litter boxes</label></div>
+              <div class="check-item"><input type="checkbox" id="n10"><label for="n10">Shake litter mats</label></div>
+              <div class="check-item"><input type="checkbox" id="n11"><label for="n11">Move or fold one small laundry load</label></div>
+            </div>
           </div>
         </div>
       </div>
@@ -417,12 +524,51 @@
           <p>Professional order: spray first, then clean from least dirty to most dirty.</p>
         </div>
         <div class="timeline">
-          <div class="timeline-item"><strong>Step 1</strong><div>Spray shower, tub, sink, counters, and toilet. Add bowl cleaner to the toilet and let products sit.</div></div>
-          <div class="timeline-item"><strong>Step 2</strong><div>Clean mirrors and light fixtures while products work.</div></div>
-          <div class="timeline-item"><strong>Step 3</strong><div>Wipe sink, faucet, counters, and cabinet handles.</div></div>
-          <div class="timeline-item"><strong>Step 4</strong><div>Scrub the shower and tub.</div></div>
-          <div class="timeline-item"><strong>Step 5</strong><div>Clean the toilet bowl, seat, lid, base, and floor around it.</div></div>
-          <div class="timeline-item"><strong>Step 6</strong><div>Mop the floor on your way out of the room.</div></div>
+          <div class="timeline-item">
+            <strong>Step 1</strong>
+            <h3>Spray first</h3>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="b1"><label for="b1">Spray shower, tub, sink, counters, and toilet</label></div>
+              <div class="check-item"><input type="checkbox" id="b2"><label for="b2">Add bowl cleaner to the toilet and let products sit</label></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 2</strong>
+            <h3>Mirrors + lights</h3>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="b3"><label for="b3">Clean mirrors</label></div>
+              <div class="check-item"><input type="checkbox" id="b4"><label for="b4">Wipe light fixtures if dusty</label></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 3</strong>
+            <h3>Sink area</h3>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="b5"><label for="b5">Wipe sink, faucet, counters, and cabinet handles</label></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 4</strong>
+            <h3>Shower + tub</h3>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="b6"><label for="b6">Scrub the shower and tub</label></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 5</strong>
+            <h3>Toilet</h3>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="b7"><label for="b7">Clean the toilet bowl, seat, lid, and base</label></div>
+              <div class="check-item"><input type="checkbox" id="b8"><label for="b8">Wipe the floor around the toilet</label></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <strong>Step 6</strong>
+            <h3>Floor</h3>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="b9"><label for="b9">Mop the floor on your way out</label></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -436,21 +582,21 @@
         <div class="grid-2">
           <div class="task-card">
             <h3>Kitchen + Home</h3>
-            <ul>
-              <li>Wash dishes or run dishwasher</li>
-              <li>Wipe counters</li>
-              <li>Wipe stovetop if used</li>
-              <li>Sweep crumbs</li>
-              <li>Complete 10-minute nightly reset</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="d1"><label for="d1">Wash dishes or run dishwasher</label></div>
+              <div class="check-item"><input type="checkbox" id="d2"><label for="d2">Wipe counters</label></div>
+              <div class="check-item"><input type="checkbox" id="d3"><label for="d3">Wipe stovetop if used</label></div>
+              <div class="check-item"><input type="checkbox" id="d4"><label for="d4">Sweep crumbs</label></div>
+              <div class="check-item"><input type="checkbox" id="d5"><label for="d5">Complete 10-minute nightly reset</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Pets + Laundry</h3>
-            <ul>
-              <li>Scoop litter boxes</li>
-              <li>Sweep litter area if needed</li>
-              <li>Run one small load of laundry if needed</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="d6"><label for="d6">Scoop litter boxes</label></div>
+              <div class="check-item"><input type="checkbox" id="d7"><label for="d7">Sweep litter area if needed</label></div>
+              <div class="check-item"><input type="checkbox" id="d8"><label for="d8">Run one small load of laundry if needed</label></div>
+            </div>
           </div>
         </div>
       </div>
@@ -465,28 +611,28 @@
         <div class="grid-3">
           <div class="task-card">
             <h3>Kitchen</h3>
-            <ul>
-              <li>Mop kitchen floor</li>
-              <li>Clean microwave interior</li>
-              <li>Wipe appliance fronts</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="w1"><label for="w1">Mop kitchen floor</label></div>
+              <div class="check-item"><input type="checkbox" id="w2"><label for="w2">Clean microwave interior</label></div>
+              <div class="check-item"><input type="checkbox" id="w3"><label for="w3">Wipe appliance fronts</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Bathrooms + Bedrooms</h3>
-            <ul>
-              <li>Complete 20-minute bathroom routine</li>
-              <li>Change bedding</li>
-              <li>Vacuum bedroom floors</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="w4"><label for="w4">Complete 20-minute bathroom routine</label></div>
+              <div class="check-item"><input type="checkbox" id="w5"><label for="w5">Change bedding</label></div>
+              <div class="check-item"><input type="checkbox" id="w6"><label for="w6">Vacuum bedroom floors</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Living Areas + Pets</h3>
-            <ul>
-              <li>Vacuum rugs and furniture</li>
-              <li>Dust surfaces</li>
-              <li>Vacuum litter areas</li>
-              <li>Clean around litter boxes</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="w7"><label for="w7">Vacuum rugs and furniture</label></div>
+              <div class="check-item"><input type="checkbox" id="w8"><label for="w8">Dust surfaces</label></div>
+              <div class="check-item"><input type="checkbox" id="w9"><label for="w9">Vacuum litter areas</label></div>
+              <div class="check-item"><input type="checkbox" id="w10"><label for="w10">Clean around litter boxes</label></div>
+            </div>
           </div>
         </div>
       </div>
@@ -499,13 +645,13 @@
           <p>Every two weeks, clean the details that make the house feel finished.</p>
         </div>
         <div class="task-card">
-          <ul>
-            <li>Vacuum under furniture edges</li>
-            <li>Clean baseboards in high-traffic areas</li>
-            <li>Wash pet bedding</li>
-            <li>Clean window sills</li>
-            <li>Wipe interior doors and handles</li>
-          </ul>
+          <div class="checklist">
+            <div class="check-item"><input type="checkbox" id="bw1"><label for="bw1">Vacuum under furniture edges</label></div>
+            <div class="check-item"><input type="checkbox" id="bw2"><label for="bw2">Clean baseboards in high-traffic areas</label></div>
+            <div class="check-item"><input type="checkbox" id="bw3"><label for="bw3">Wash pet bedding</label></div>
+            <div class="check-item"><input type="checkbox" id="bw4"><label for="bw4">Clean window sills</label></div>
+            <div class="check-item"><input type="checkbox" id="bw5"><label for="bw5">Wipe interior doors and handles</label></div>
+          </div>
         </div>
       </div>
     </section>
@@ -519,32 +665,32 @@
         <div class="grid-3">
           <div class="task-card">
             <h3>Kitchen</h3>
-            <ul>
-              <li>Clean refrigerator shelves</li>
-              <li>Clean dishwasher filter</li>
-              <li>Clean oven interior if needed</li>
-              <li>Clean refrigerator door seals</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="m1"><label for="m1">Clean refrigerator shelves</label></div>
+              <div class="check-item"><input type="checkbox" id="m2"><label for="m2">Clean dishwasher filter</label></div>
+              <div class="check-item"><input type="checkbox" id="m3"><label for="m3">Clean oven interior if needed</label></div>
+              <div class="check-item"><input type="checkbox" id="m4"><label for="m4">Clean refrigerator door seals</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Bathrooms + House</h3>
-            <ul>
-              <li>Clean drains</li>
-              <li>Scrub grout if needed</li>
-              <li>Dust vents and air returns</li>
-              <li>Clean light switches and door handles</li>
-              <li>Wash trash cans</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="m5"><label for="m5">Clean drains</label></div>
+              <div class="check-item"><input type="checkbox" id="m6"><label for="m6">Scrub grout if needed</label></div>
+              <div class="check-item"><input type="checkbox" id="m7"><label for="m7">Dust vents and air returns</label></div>
+              <div class="check-item"><input type="checkbox" id="m8"><label for="m8">Clean light switches and door handles</label></div>
+              <div class="check-item"><input type="checkbox" id="m9"><label for="m9">Wash trash cans</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Maintenance</h3>
-            <ul>
-              <li>Replace or clean HVAC / AC filter</li>
-              <li>Check for plumbing leaks</li>
-              <li>Inspect basement for moisture, pests, or mold</li>
-              <li>Inspect washing machine hoses</li>
-              <li>Check sump pump pit if present</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="m10"><label for="m10">Replace or clean HVAC / AC filter</label></div>
+              <div class="check-item"><input type="checkbox" id="m11"><label for="m11">Check for plumbing leaks</label></div>
+              <div class="check-item"><input type="checkbox" id="m12"><label for="m12">Inspect basement for moisture, pests, or mold</label></div>
+              <div class="check-item"><input type="checkbox" id="m13"><label for="m13">Inspect washing machine hoses</label></div>
+              <div class="check-item"><input type="checkbox" id="m14"><label for="m14">Check sump pump pit if present</label></div>
+            </div>
           </div>
         </div>
       </div>
@@ -559,29 +705,29 @@
         <div class="grid-2">
           <div class="task-card">
             <h3>Deep Cleaning</h3>
-            <ul>
-              <li>Wash or mop walls in high-traffic areas</li>
-              <li>Clean baseboards throughout the house</li>
-              <li>Clean window tracks</li>
-              <li>Clean blinds</li>
-              <li>Wash curtains if applicable</li>
-              <li>Move furniture and vacuum underneath</li>
-              <li>Pull refrigerator out and clean behind it</li>
-              <li>Pull stove out and clean behind it</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="q1"><label for="q1">Wash or mop walls in high-traffic areas</label></div>
+              <div class="check-item"><input type="checkbox" id="q2"><label for="q2">Clean baseboards throughout the house</label></div>
+              <div class="check-item"><input type="checkbox" id="q3"><label for="q3">Clean window tracks</label></div>
+              <div class="check-item"><input type="checkbox" id="q4"><label for="q4">Clean blinds</label></div>
+              <div class="check-item"><input type="checkbox" id="q5"><label for="q5">Wash curtains if applicable</label></div>
+              <div class="check-item"><input type="checkbox" id="q6"><label for="q6">Move furniture and vacuum underneath</label></div>
+              <div class="check-item"><input type="checkbox" id="q7"><label for="q7">Pull refrigerator out and clean behind it</label></div>
+              <div class="check-item"><input type="checkbox" id="q8"><label for="q8">Pull stove out and clean behind it</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Maintenance Checks</h3>
-            <ul>
-              <li>Clean refrigerator coils</li>
-              <li>Inspect caulking around tubs, showers, and sinks</li>
-              <li>Run garbage disposal with ice and citrus</li>
-              <li>Check water heater for leaks or rust</li>
-              <li>Clean AC condensate drain line</li>
-              <li>Test GFCI outlets in kitchen, bathrooms, and garage</li>
-              <li>Inspect toilet flappers for silent leaks</li>
-              <li>Check window locks and tracks</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="q9"><label for="q9">Clean refrigerator coils</label></div>
+              <div class="check-item"><input type="checkbox" id="q10"><label for="q10">Inspect caulking around tubs, showers, and sinks</label></div>
+              <div class="check-item"><input type="checkbox" id="q11"><label for="q11">Run garbage disposal with ice and citrus</label></div>
+              <div class="check-item"><input type="checkbox" id="q12"><label for="q12">Check water heater for leaks or rust</label></div>
+              <div class="check-item"><input type="checkbox" id="q13"><label for="q13">Clean AC condensate drain line</label></div>
+              <div class="check-item"><input type="checkbox" id="q14"><label for="q14">Test GFCI outlets in kitchen, bathrooms, and garage</label></div>
+              <div class="check-item"><input type="checkbox" id="q15"><label for="q15">Inspect toilet flappers for silent leaks</label></div>
+              <div class="check-item"><input type="checkbox" id="q16"><label for="q16">Check window locks and tracks</label></div>
+            </div>
           </div>
         </div>
       </div>
@@ -596,36 +742,36 @@
         <div class="grid-2">
           <div class="task-card">
             <h3>Twice Per Year</h3>
-            <ul>
-              <li>Clean gutters</li>
-              <li>Flush water heater</li>
-              <li>Clean dryer vent and dryer duct</li>
-              <li>Replace HVAC / furnace filters if not done monthly</li>
-              <li>Check attic or roof area for leaks</li>
-              <li>Inspect exterior siding and foundation</li>
-              <li>Check weather stripping on doors and windows</li>
-              <li>Clean exterior vents and exhaust fans</li>
-              <li>Lubricate garage door tracks and hinges</li>
-              <li>Declutter and reorganize garage and basement storage</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="hy1"><label for="hy1">Clean gutters</label></div>
+              <div class="check-item"><input type="checkbox" id="hy2"><label for="hy2">Flush water heater</label></div>
+              <div class="check-item"><input type="checkbox" id="hy3"><label for="hy3">Clean dryer vent and dryer duct</label></div>
+              <div class="check-item"><input type="checkbox" id="hy4"><label for="hy4">Replace HVAC / furnace filters if not done monthly</label></div>
+              <div class="check-item"><input type="checkbox" id="hy5"><label for="hy5">Check attic or roof area for leaks</label></div>
+              <div class="check-item"><input type="checkbox" id="hy6"><label for="hy6">Inspect exterior siding and foundation</label></div>
+              <div class="check-item"><input type="checkbox" id="hy7"><label for="hy7">Check weather stripping on doors and windows</label></div>
+              <div class="check-item"><input type="checkbox" id="hy8"><label for="hy8">Clean exterior vents and exhaust fans</label></div>
+              <div class="check-item"><input type="checkbox" id="hy9"><label for="hy9">Lubricate garage door tracks and hinges</label></div>
+              <div class="check-item"><input type="checkbox" id="hy10"><label for="hy10">Declutter and reorganize garage and basement storage</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Annual</h3>
-            <ul>
-              <li>Service HVAC system</li>
-              <li>Wash interior windows</li>
-              <li>Clean exterior windows</li>
-              <li>Deep clean basement</li>
-              <li>Clean garage walls</li>
-              <li>Clean inside cabinets and closets</li>
-              <li>Inspect smoke detectors and replace batteries</li>
-              <li>Inspect chimney if applicable</li>
-              <li>Reseal grout in showers if needed</li>
-              <li>Check sump pump operation</li>
-              <li>Clean range hood filters</li>
-              <li>Inspect deck, porch, driveway, and walkways</li>
-              <li>Check attic insulation and ventilation</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="a1"><label for="a1">Service HVAC system</label></div>
+              <div class="check-item"><input type="checkbox" id="a2"><label for="a2">Wash interior windows</label></div>
+              <div class="check-item"><input type="checkbox" id="a3"><label for="a3">Clean exterior windows</label></div>
+              <div class="check-item"><input type="checkbox" id="a4"><label for="a4">Deep clean basement</label></div>
+              <div class="check-item"><input type="checkbox" id="a5"><label for="a5">Clean garage walls</label></div>
+              <div class="check-item"><input type="checkbox" id="a6"><label for="a6">Clean inside cabinets and closets</label></div>
+              <div class="check-item"><input type="checkbox" id="a7"><label for="a7">Inspect smoke detectors and replace batteries</label></div>
+              <div class="check-item"><input type="checkbox" id="a8"><label for="a8">Inspect chimney if applicable</label></div>
+              <div class="check-item"><input type="checkbox" id="a9"><label for="a9">Reseal grout in showers if needed</label></div>
+              <div class="check-item"><input type="checkbox" id="a10"><label for="a10">Check sump pump operation</label></div>
+              <div class="check-item"><input type="checkbox" id="a11"><label for="a11">Clean range hood filters</label></div>
+              <div class="check-item"><input type="checkbox" id="a12"><label for="a12">Inspect deck, porch, driveway, and walkways</label></div>
+              <div class="check-item"><input type="checkbox" id="a13"><label for="a13">Check attic insulation and ventilation</label></div>
+            </div>
           </div>
         </div>
       </div>
@@ -640,25 +786,25 @@
         <div class="grid-3">
           <div class="task-card">
             <h3>Weekly</h3>
-            <ul>
-              <li>Mow lawn</li>
-              <li>Pick up branches and debris</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="y1"><label for="y1">Mow lawn</label></div>
+              <div class="check-item"><input type="checkbox" id="y2"><label for="y2">Pick up branches and debris</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Monthly</h3>
-            <ul>
-              <li>Trim plants</li>
-              <li>Weed garden beds</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="y3"><label for="y3">Trim plants</label></div>
+              <div class="check-item"><input type="checkbox" id="y4"><label for="y4">Weed garden beds</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Seasonal</h3>
-            <ul>
-              <li>Mulch beds</li>
-              <li>Leaf cleanup</li>
-              <li>Check drainage and water flow away from house</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="y5"><label for="y5">Mulch beds</label></div>
+              <div class="check-item"><input type="checkbox" id="y6"><label for="y6">Leaf cleanup</label></div>
+              <div class="check-item"><input type="checkbox" id="y7"><label for="y7">Check drainage and water flow away from house</label></div>
+            </div>
           </div>
         </div>
       </div>
@@ -673,26 +819,26 @@
         <div class="grid-3">
           <div class="task-card">
             <h3>Weekly</h3>
-            <ul>
-              <li>Organize supplies</li>
-              <li>Wipe work tables</li>
-              <li>Sweep floor</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="bs1"><label for="bs1">Organize supplies</label></div>
+              <div class="check-item"><input type="checkbox" id="bs2"><label for="bs2">Wipe work tables</label></div>
+              <div class="check-item"><input type="checkbox" id="bs3"><label for="bs3">Sweep floor</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Monthly</h3>
-            <ul>
-              <li>Inventory supplies</li>
-              <li>Declutter storage bins</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="bs4"><label for="bs4">Inventory supplies</label></div>
+              <div class="check-item"><input type="checkbox" id="bs5"><label for="bs5">Declutter storage bins</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Quarterly</h3>
-            <ul>
-              <li>Deep clean workspace</li>
-              <li>Reorganize product storage</li>
-              <li>Remove cobwebs</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="bs6"><label for="bs6">Deep clean workspace</label></div>
+              <div class="check-item"><input type="checkbox" id="bs7"><label for="bs7">Reorganize product storage</label></div>
+              <div class="check-item"><input type="checkbox" id="bs8"><label for="bs8">Remove cobwebs</label></div>
+            </div>
           </div>
         </div>
       </div>
@@ -707,27 +853,27 @@
         <div class="grid-3">
           <div class="task-card">
             <h3>Start of Week</h3>
-            <ul>
-              <li>Laundry</li>
-              <li>Product making / business tasks</li>
-              <li>Bathroom cleaning</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="sf1"><label for="sf1">Laundry</label></div>
+              <div class="check-item"><input type="checkbox" id="sf2"><label for="sf2">Product making / business tasks</label></div>
+              <div class="check-item"><input type="checkbox" id="sf3"><label for="sf3">Bathroom cleaning</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>Midweek</h3>
-            <ul>
-              <li>Vacuum + mop floors</li>
-              <li>Bedrooms + bedding</li>
-              <li>Laundry catch-up</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="sf4"><label for="sf4">Vacuum + mop floors</label></div>
+              <div class="check-item"><input type="checkbox" id="sf5"><label for="sf5">Bedrooms + bedding</label></div>
+              <div class="check-item"><input type="checkbox" id="sf6"><label for="sf6">Laundry catch-up</label></div>
+            </div>
           </div>
           <div class="task-card">
             <h3>End of Week</h3>
-            <ul>
-              <li>Grocery + house reset</li>
-              <li>Yard work</li>
-              <li>Meal prep + planning</li>
-            </ul>
+            <div class="checklist">
+              <div class="check-item"><input type="checkbox" id="sf7"><label for="sf7">Grocery + house reset</label></div>
+              <div class="check-item"><input type="checkbox" id="sf8"><label for="sf8">Yard work</label></div>
+              <div class="check-item"><input type="checkbox" id="sf9"><label for="sf9">Meal prep + planning</label></div>
+            </div>
           </div>
         </div>
         <p class="footer-note">
@@ -740,5 +886,86 @@
   <footer>
     <div class="container footer-note">Designed for a real household rhythm: clean enough to stay calm, structured enough to stay manageable.</div>
   </footer>
+
+  <script>
+    const STORAGE_KEY = 'home-maintenance-checklist-v1';
+
+    function getCheckboxes() {
+      return Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    }
+
+    function saveState() {
+      const state = {};
+      getCheckboxes().forEach(cb => {
+        state[cb.id] = cb.checked;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const state = JSON.parse(raw);
+        getCheckboxes().forEach(cb => {
+          cb.checked = Boolean(state[cb.id]);
+        });
+      } catch (error) {
+        console.error('Could not load saved checklist state.', error);
+      }
+    }
+
+    function updateCompletedStyles() {
+      getCheckboxes().forEach(cb => {
+        const row = cb.closest('.check-item');
+        if (!row) return;
+        row.classList.toggle('completed', cb.checked);
+      });
+    }
+
+    function updateStats() {
+      const checkboxes = getCheckboxes();
+      const total = checkboxes.length;
+      const completed = checkboxes.filter(cb => cb.checked).length;
+      const remaining = total - completed;
+      const percent = total ? Math.round((completed / total) * 100) : 0;
+
+      document.getElementById('completedCount').textContent = completed;
+      document.getElementById('remainingCount').textContent = remaining;
+      document.getElementById('percentComplete').textContent = `${percent}%`;
+      document.getElementById('progressBar').style.width = `${percent}%`;
+      document.getElementById('progressText').textContent = `${completed} of ${total} tasks completed.`;
+    }
+
+    function refreshUI() {
+      updateCompletedStyles();
+      updateStats();
+      saveState();
+    }
+
+    function setAllCheckboxes(checked) {
+      getCheckboxes().forEach(cb => {
+        cb.checked = checked;
+      });
+      refreshUI();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      refreshUI();
+
+      getCheckboxes().forEach(cb => {
+        cb.addEventListener('change', refreshUI);
+      });
+
+      document.getElementById('resetAll').addEventListener('click', () => {
+        setAllCheckboxes(false);
+      });
+
+      document.getElementById('checkAll').addEventListener('click', () => {
+        setAllCheckboxes(true);
+      });
+    });
+  </script>
 </body>
 </html>
