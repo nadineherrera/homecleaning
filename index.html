@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Cleaning & Maintenance System</title>
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --surface: #ffffff;
+      --surface-2: #f0ebe2;
+      --text: #1f1f1f;
+      --muted: #5c5c5c;
+      --accent: #8f7a5a;
+      --border: #ddd4c7;
+      --shadow: 0 10px 30px rgba(31, 31, 31, 0.08);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(180deg, #f9f6f0 0%, #f2ece2 100%);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .hero {
+      padding: 48px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .info-card,
+    .section-card,
+    .mini-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 34px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+    }
+
+    .hero p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      background: var(--surface-2);
+      box-shadow: none;
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    .info-card {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .info-card h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .quick-links a,
+    .button-link {
+      text-decoration: none;
+      color: var(--text);
+      padding: 12px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    main {
+      padding: 8px 0 48px;
+    }
+
+    .section {
+      margin-top: 24px;
+      scroll-margin-top: 88px;
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.65rem;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .task-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .task-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .timeline-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+
+    .timeline-item strong {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    footer {
+      padding: 12px 0 40px;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .quick-links,
+      .hero-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-card,
+      .info-card,
+      .section-card {
+        padding: 20px;
+      }
+
+      nav {
+        gap: 8px;
+      }
+
+      nav a {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="brand">Home Cleaning & Maintenance System</div>
+      <nav>
+        <a href="#daily">Daily</a>
+        <a href="#weekly">Weekly</a>
+        <a href="#monthly">Monthly+</a>
+        <a href="#bathroom">20-Min Bath</a>
+        <a href="#nightly">10-Min Nightly</a>
+        <a href="#homeowner">Maintenance</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-card">
+        <div class="eyebrow">Family of 3 • 3 Cats • 3 Bedroom • 2 Bath</div>
+        <h1>Keep the house maintained without another exhausting reset weekend.</h1>
+        <p>
+          This webpage organizes cleaning, homeowner maintenance, pet-related upkeep,
+          yard care, and basement business operations into a simple rhythm: daily,
+          weekly, biweekly, monthly, quarterly, twice per year, and annual.
+        </p>
+        <a class="button-link" href="#daily">Start with the routine</a>
+
+        <div class="hero-meta">
+          <div class="mini-card">
+            <strong>Nightly reset</strong>
+            10 minutes to keep surfaces clear and the kitchen under control.
+          </div>
+          <div class="mini-card">
+            <strong>Bathroom method</strong>
+            20-minute routine using spray-first professional order.
+          </div>
+          <div class="mini-card">
+            <strong>Basement + business</strong>
+            Includes unfinished basement upkeep and workspace cleaning.
+          </div>
+          <div class="mini-card">
+            <strong>Homeowner care</strong>
+            Filters, gutters, dryer vent, water heater, leaks, and more.
+          </div>
+        </div>
+      </div>
+
+      <aside class="info-card">
+        <h2>What this covers</h2>
+        <p>
+          3 bedrooms, 2 bathrooms, den, unfinished basement, 2-car garage,
+          front yard, backyard, kitchen, pet areas, and home system maintenance.
+        </p>
+        <div class="quick-links">
+          <a href="#biweekly">Biweekly tasks</a>
+          <a href="#quarterly">Quarterly tasks</a>
+          <a href="#yard">Yard care</a>
+          <a href="#business">Business workspace</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="nightly" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>10-Minute Nightly Reset</h2>
+          <p>Use this every evening to stop clutter and dishes from building up.</p>
+        </div>
+        <div class="grid-3">
+          <div class="task-card">
+            <h3>Kitchen</h3>
+            <ul>
+              <li>Load dishwasher or wash dishes</li>
+              <li>Wipe counters and stovetop</li>
+              <li>Put food away</li>
+              <li>Quick sweep of crumbs</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>House Reset</h3>
+            <ul>
+              <li>Pick up clutter</li>
+              <li>Fold blankets</li>
+              <li>Straighten pillows</li>
+              <li>Quick bathroom sink wipe</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Pets + Laundry</h3>
+            <ul>
+              <li>Scoop litter boxes</li>
+              <li>Shake litter mats</li>
+              <li>Move or fold one small laundry load</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bathroom" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>20-Minute Bathroom Cleaning Method</h2>
+          <p>Professional order: spray first, then clean from least dirty to most dirty.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item"><strong>Step 1</strong><div>Spray shower, tub, sink, counters, and toilet. Add bowl cleaner to the toilet and let products sit.</div></div>
+          <div class="timeline-item"><strong>Step 2</strong><div>Clean mirrors and light fixtures while products work.</div></div>
+          <div class="timeline-item"><strong>Step 3</strong><div>Wipe sink, faucet, counters, and cabinet handles.</div></div>
+          <div class="timeline-item"><strong>Step 4</strong><div>Scrub the shower and tub.</div></div>
+          <div class="timeline-item"><strong>Step 5</strong><div>Clean the toilet bowl, seat, lid, base, and floor around it.</div></div>
+          <div class="timeline-item"><strong>Step 6</strong><div>Mop the floor on your way out of the room.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="daily" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Daily Tasks</h2>
+          <p>Small daily maintenance keeps the house from sliding back into overwhelm.</p>
+        </div>
+        <div class="grid-2">
+          <div class="task-card">
+            <h3>Kitchen + Home</h3>
+            <ul>
+              <li>Wash dishes or run dishwasher</li>
+              <li>Wipe counters</li>
+              <li>Wipe stovetop if used</li>
+              <li>Sweep crumbs</li>
+              <li>Complete 10-minute nightly reset</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Pets + Laundry</h3>
+            <ul>
+              <li>Scoop litter boxes</li>
+              <li>Sweep litter area if needed</li>
+              <li>Run one small load of laundry if needed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="weekly" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Weekly Tasks</h2>
+          <p>Use these as your standard house rhythm.</p>
+        </div>
+        <div class="grid-3">
+          <div class="task-card">
+            <h3>Kitchen</h3>
+            <ul>
+              <li>Mop kitchen floor</li>
+              <li>Clean microwave interior</li>
+              <li>Wipe appliance fronts</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Bathrooms + Bedrooms</h3>
+            <ul>
+              <li>Complete 20-minute bathroom routine</li>
+              <li>Change bedding</li>
+              <li>Vacuum bedroom floors</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Living Areas + Pets</h3>
+            <ul>
+              <li>Vacuum rugs and furniture</li>
+              <li>Dust surfaces</li>
+              <li>Vacuum litter areas</li>
+              <li>Clean around litter boxes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="biweekly" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Biweekly Tasks</h2>
+          <p>Every two weeks, clean the details that make the house feel finished.</p>
+        </div>
+        <div class="task-card">
+          <ul>
+            <li>Vacuum under furniture edges</li>
+            <li>Clean baseboards in high-traffic areas</li>
+            <li>Wash pet bedding</li>
+            <li>Clean window sills</li>
+            <li>Wipe interior doors and handles</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="monthly" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Monthly Tasks</h2>
+          <p>Monthly work prevents grime, odor, and small maintenance issues.</p>
+        </div>
+        <div class="grid-3">
+          <div class="task-card">
+            <h3>Kitchen</h3>
+            <ul>
+              <li>Clean refrigerator shelves</li>
+              <li>Clean dishwasher filter</li>
+              <li>Clean oven interior if needed</li>
+              <li>Clean refrigerator door seals</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Bathrooms + House</h3>
+            <ul>
+              <li>Clean drains</li>
+              <li>Scrub grout if needed</li>
+              <li>Dust vents and air returns</li>
+              <li>Clean light switches and door handles</li>
+              <li>Wash trash cans</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Maintenance</h3>
+            <ul>
+              <li>Replace or clean HVAC / AC filter</li>
+              <li>Check for plumbing leaks</li>
+              <li>Inspect basement for moisture, pests, or mold</li>
+              <li>Inspect washing machine hoses</li>
+              <li>Check sump pump pit if present</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quarterly" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Quarterly Tasks</h2>
+          <p>Every 3 to 4 months, do the bigger cleaning and home-system checks.</p>
+        </div>
+        <div class="grid-2">
+          <div class="task-card">
+            <h3>Deep Cleaning</h3>
+            <ul>
+              <li>Wash or mop walls in high-traffic areas</li>
+              <li>Clean baseboards throughout the house</li>
+              <li>Clean window tracks</li>
+              <li>Clean blinds</li>
+              <li>Wash curtains if applicable</li>
+              <li>Move furniture and vacuum underneath</li>
+              <li>Pull refrigerator out and clean behind it</li>
+              <li>Pull stove out and clean behind it</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Maintenance Checks</h3>
+            <ul>
+              <li>Clean refrigerator coils</li>
+              <li>Inspect caulking around tubs, showers, and sinks</li>
+              <li>Run garbage disposal with ice and citrus</li>
+              <li>Check water heater for leaks or rust</li>
+              <li>Clean AC condensate drain line</li>
+              <li>Test GFCI outlets in kitchen, bathrooms, and garage</li>
+              <li>Inspect toilet flappers for silent leaks</li>
+              <li>Check window locks and tracks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="homeowner" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Twice Per Year + Annual Homeowner Maintenance</h2>
+          <p>These are the tasks that protect the house and reduce expensive surprises.</p>
+        </div>
+        <div class="grid-2">
+          <div class="task-card">
+            <h3>Twice Per Year</h3>
+            <ul>
+              <li>Clean gutters</li>
+              <li>Flush water heater</li>
+              <li>Clean dryer vent and dryer duct</li>
+              <li>Replace HVAC / furnace filters if not done monthly</li>
+              <li>Check attic or roof area for leaks</li>
+              <li>Inspect exterior siding and foundation</li>
+              <li>Check weather stripping on doors and windows</li>
+              <li>Clean exterior vents and exhaust fans</li>
+              <li>Lubricate garage door tracks and hinges</li>
+              <li>Declutter and reorganize garage and basement storage</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Annual</h3>
+            <ul>
+              <li>Service HVAC system</li>
+              <li>Wash interior windows</li>
+              <li>Clean exterior windows</li>
+              <li>Deep clean basement</li>
+              <li>Clean garage walls</li>
+              <li>Clean inside cabinets and closets</li>
+              <li>Inspect smoke detectors and replace batteries</li>
+              <li>Inspect chimney if applicable</li>
+              <li>Reseal grout in showers if needed</li>
+              <li>Check sump pump operation</li>
+              <li>Clean range hood filters</li>
+              <li>Inspect deck, porch, driveway, and walkways</li>
+              <li>Check attic insulation and ventilation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="yard" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Front Yard + Backyard Care</h2>
+          <p>Outdoor upkeep keeps the property looking maintained and helps prevent drainage issues.</p>
+        </div>
+        <div class="grid-3">
+          <div class="task-card">
+            <h3>Weekly</h3>
+            <ul>
+              <li>Mow lawn</li>
+              <li>Pick up branches and debris</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Monthly</h3>
+            <ul>
+              <li>Trim plants</li>
+              <li>Weed garden beds</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Seasonal</h3>
+            <ul>
+              <li>Mulch beds</li>
+              <li>Leaf cleanup</li>
+              <li>Check drainage and water flow away from house</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="business" class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Basement Business Workspace</h2>
+          <p>Use this for unfinished basement operations and product-making organization.</p>
+        </div>
+        <div class="grid-3">
+          <div class="task-card">
+            <h3>Weekly</h3>
+            <ul>
+              <li>Organize supplies</li>
+              <li>Wipe work tables</li>
+              <li>Sweep floor</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Monthly</h3>
+            <ul>
+              <li>Inventory supplies</li>
+              <li>Declutter storage bins</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Quarterly</h3>
+            <ul>
+              <li>Deep clean workspace</li>
+              <li>Reorganize product storage</li>
+              <li>Remove cobwebs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <div class="section-title">
+          <h2>Simple Weekly Flow</h2>
+          <p>A sample rhythm you can follow and adjust around your work schedule.</p>
+        </div>
+        <div class="grid-3">
+          <div class="task-card">
+            <h3>Start of Week</h3>
+            <ul>
+              <li>Laundry</li>
+              <li>Product making / business tasks</li>
+              <li>Bathroom cleaning</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>Midweek</h3>
+            <ul>
+              <li>Vacuum + mop floors</li>
+              <li>Bedrooms + bedding</li>
+              <li>Laundry catch-up</li>
+            </ul>
+          </div>
+          <div class="task-card">
+            <h3>End of Week</h3>
+            <ul>
+              <li>Grocery + house reset</li>
+              <li>Yard work</li>
+              <li>Meal prep + planning</li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-note">
+          Save this file as <strong>index.html</strong>, upload it to a GitHub repository, and enable GitHub Pages to publish it as a website.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-note">Designed for a real household rhythm: clean enough to stay calm, structured enough to stay manageable.</div>
+  </footer>
+</body>
+</html>
